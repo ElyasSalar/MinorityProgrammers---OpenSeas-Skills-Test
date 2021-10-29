@@ -15,3 +15,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.sort-icons{
+  display: inline-block;
+  transition: .25s;
+}
+
+.arrow{
+  transform: rotateZ(180deg);
+}
+.arrow-opened{
+  transform: rotateZ(90deg);
+}

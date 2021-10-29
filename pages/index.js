@@ -2,6 +2,7 @@ import Head from 'next/head'
 import NavBar from '../components/navbar'
 import CoverSection from '../components/cover-section'
 import Collections from '../components/collections'
+import Collectibles from '../components/collectibles'
 
 const collections = [
   {
@@ -24,6 +25,44 @@ const collections = [
   },
 ]
 
+const collectibles = [
+  {
+    imageUrl: 'https://bit.ly/sage-adebayo',
+    name: 'Music Heroes',
+    time: '2d 1h 23m 1s',
+    mintAmount: '100,000',
+    by: 'Young Thug'
+  },
+  {
+    imageUrl: 'https://bit.ly/sage-adebayo',
+    name: 'Music Heroes',
+    time: '2d 1h 23m 1s',
+    mintAmount: '100,000',
+    by: 'Young Thug'
+  },
+  {
+    imageUrl: 'https://bit.ly/sage-adebayo',
+    name: 'Music Heroes',
+    time: '2d 1h 23m 1s',
+    mintAmount: '100,000',
+    by: 'Young Thug'
+  },
+  {
+    imageUrl: 'https://bit.ly/sage-adebayo',
+    name: 'Music Heroes',
+    time: '2d 1h 23m 1s',
+    mintAmount: '100,000',
+    by: 'Young Thug'
+  },
+  {
+    imageUrl: 'https://bit.ly/sage-adebayo',
+    name: 'Music Heroes',
+    time: '2d 1h 23m 1s',
+    mintAmount: '100,000',
+    by: 'Young Thug'
+  },
+]
+
 export default function Home() {
   return (
     <>
@@ -43,6 +82,11 @@ export default function Home() {
         heading='Top Collections'
         viewAll='#'
         collections={collections}
+      />
+      <Collectibles
+        heading='Collectibles'
+        viewAll='#'
+        collections={collectibles}
       />
     </>
   )
