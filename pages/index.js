@@ -25,7 +25,7 @@ const collections = [
   },
 ]
 
-const collectibles = [
+export const collectibles = [
   {
     imageUrl: 'https://bit.ly/sage-adebayo',
     name: 'Music Heroes',

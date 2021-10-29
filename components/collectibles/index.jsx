@@ -55,6 +55,7 @@ export default function Collections({ heading, viewAll, collections }){
               <MenuOptionGroup onChange={sortValue => setSortValue(sortValue)}>
                 {sortOptions.map(each => 
                   <MenuItemOption
+                    key={each}
                     fontWeight='light'
                     value={each}
                     isChecked={each === sortValue}

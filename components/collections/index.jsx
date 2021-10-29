@@ -18,15 +18,16 @@ export default function Collections({ heading, viewAll, collections }){
         </Flex>
         <ScrollContainer style={collectStyle} overflowX='scroll'>
         {
-          collections?.map(({imageUrl, name, price, volume}) => (
+          collections?.map(({imageUrl, name, price, volume}, i) => (
             <Flex
+              key={i}
               bgColor='#27292C'
               borderRadius='17px'
               my={4}
               border='1px solid #C4C4C4'
               color='white'
               minW='45%'
-              pY={5}
+              py={5}
               pr={5}
             >
               <Image
