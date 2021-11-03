@@ -12,12 +12,18 @@ export default function Home() {
 
   const assets = useFetch('/api/v1/assets', {order_by: orderBy});
 
-  const collectionToBeFetched = ['shiny-rappers', 'cryptohiphopcrew', 'music-heroes'];
-  const collections = collectionToBeFetched.map(slug => (
-    useFetch('/api/v1/assets', { collection: slug })?.data?.assets[0]?.collection)
-  )
+  const shinyRapper = useFetch('/api/v1/assets', { collection: 'shiny-rappers' });
+  const crypto = useFetch('/api/v1/assets', { collection: 'cryptohiphopcrew' });
+  const musicHero = useFetch('/api/v1/assets', { collection: 'music-heroes' });
   
-  const isLoading = collections.length !== 3 || assets.isLoading;
+  const response = [
+    shinyRapper, 
+    crypto, 
+    musicHero
+  ]
+  const collections = response.map(each => each?.data?.assets[0]?.collection);
+  
+  const isLoading = response.every(each => each.isLoading);
   if(isLoading) return (
     <Flex
     justifyContent='center'
