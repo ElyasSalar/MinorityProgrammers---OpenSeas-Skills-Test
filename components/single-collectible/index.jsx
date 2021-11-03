@@ -9,20 +9,37 @@ import {
   Badge,
   Input,
 } from '@chakra-ui/react'
-import Image from 'next/image'
-import muddy from '../../src/img/muddy.png'
 
-export default function Collections(){
+export default function SingleCollectible({
+    collectionsName,
+    assetName,
+    startingBid,
+    currentBid,
+    contractAddress,
+    token_id,
+    description,
+    image_url,
+    isLoading,
+  }){
   const tags = ['Hip Hop', 'Atlanta', 'Rapper', 'Trapper', 'Slime']
+
+  if(isLoading) return <h1>Loading...</h1> 
   return (
     <>
-      <Box color='white' borderRadius='9px' m={7} p={8} border='1px solid #C4C4C4'>
-        <Flex>
+      <Box color='white' borderRadius='9px' m={7} p={8} border='1px solid #C4C4C4' h='90vh'>
+        <Flex h='100%'>
           <Flex style={{gap: '20px'}} flexBasis='50%'>
             <Stack>
-              <Text fontSize='xl'>MusicHeroes collections</Text>
-              <Heading fontSize='6xl'>Muddy Waters</Heading>
-              <Box border='1px solid #C4C4C4' boxSize='75%'><Image src={muddy} alt='muddy' /></Box>
+              <Text fontSize='xl'>{collectionsName}</Text>
+              <Heading fontSize='5xl'>{assetName}</Heading>
+              <Box
+                border='1px solid #C4C4C4'
+                boxSize='75%'
+                bgImage={`url('${image_url}')`}
+                bgSize='auto'
+                bgRepeat='no-repeat'
+                bgPos='center'
+              />
               <Flex style={{gap: '20px'}} fontSize='2xl'>
                 <Text>Tags</Text> 
                 <Flex style={{gap: '20px'}} alignItems='center'>
@@ -47,17 +64,17 @@ export default function Collections(){
               <Flex flexDir='column' flexBasis='25%'>
                 <Stack>
                   <Text fontSize='lg'>Current Bid</Text>
-                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>$1,017.17</Text>
+                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>${currentBid}</Text>
                 </Stack>
                 <Stack>
                   <Text fontSize='lg'>Starting Bid</Text>
-                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>$1.07</Text>
+                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>${startingBid}</Text>
                 </Stack>
               </Flex>
               <Spacer />
               <Stack textAlign='right'>
                 <Text fontSize='3xl'>Bid Ends in</Text>
-                <Text fontSize='5xl' fontWeight='bold' mt='0 !important'>12d 3h 3m 2s</Text>
+                <Text fontSize='4xl' fontWeight='bold' mt='0 !important'>12d 3h 3m 2s</Text>
               </Stack>
             </Flex>
             <Spacer />
@@ -72,7 +89,7 @@ export default function Collections(){
                   type='number'
                   textAlign='right'
                   flexBasis='60%'
-                  placeholder='$1,018.18'
+                  placeholder={`$${currentBid}`}
                   border='3px solid #00CC9B'
                   borderRadius='none'
                   h='100%'
@@ -102,16 +119,16 @@ export default function Collections(){
             >
               <Stack>
                 <Text fontSize='xl' fontWeight='bold'>Description</Text>
-                <Text fontSize='lg'>This chain represents young thug’s solidarity with his friends growing up</Text>
+                <Text fontSize='md'>{description === null ? 'no description': description?.substring(0, 210) + '...'}</Text>
               </Stack>
               <Spacer />
               <Stack>
                 <Text fontSize='xl' fontWeight='bold'>Details</Text>
-                <Flex fontSize='lg'>
-                  Contract Adress <Spacer /> 0x.1123
+                <Flex fontSize='lg' alignItems='center'>
+                  Contract Adress <Spacer /> <Text fontSize='x-small'>{contractAddress}</Text>
                 </Flex>
-                <Flex fontSize='lg'>
-                  TokenID <Spacer /> 1
+                <Flex fontSize='lg' alignItems='center'>
+                  Token ID <Spacer /> <Text fontSize='x-small'>{token_id}</Text>
                 </Flex>
                 <Flex fontSize='lg'>
                   Blockchain <Spacer /> Ethereum

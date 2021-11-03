@@ -20,17 +20,18 @@ import { MdPlayArrow } from 'react-icons/md'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import { AiOutlineCheck } from 'react-icons/ai'
 
-export default function Collections({ heading, viewAll, collections }){
+export default function Collections({ heading, viewAll, collections, setOrder, order }){
   const [selectedOption, setSelectedOption] = useState('Upcoming')
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [sortValue, setSortValue] = useState('Alphabetical');
+  
   const selectedStyles = {
     color: '#00CC9B',
     textDecoration: 'underline',
     fontWeight: 'bold',
   }
   const options = ['Upcoming', 'Marketplace', 'Sounds', 'Generative']
-  const sortOptions = ['Popularity', 'Category', 'Recently added', 'Alphabetical', 'Most Active']
+  const sortOptions = ['sale_date', 'sale_count', 'sale_price']
+  
   return (
     <>
       <Box bgColor='transparent' borderRadius='9px' m={7} p={8} border='1px solid #C4C4C4'>
@@ -42,7 +43,7 @@ export default function Collections({ heading, viewAll, collections }){
           <Menu isLazy placement='bottom-end' onOpen={() => setIsMenuOpen(true)} onClose={() => setIsMenuOpen(false)}>
             <MenuButton color='#00CC9B' fontWeight='light' onChange={() => console.log('hey')}>
               <BiSearchAlt2 className='sort-icons'/>
-              {' ' + sortValue + ' '}
+              {' ' + order + ' '}
               <MdPlayArrow className={`sort-icons ${isMenuOpen ? 'arrow-opened' : 'arrow'}`} />
             </MenuButton>
             <MenuList
@@ -52,18 +53,18 @@ export default function Collections({ heading, viewAll, collections }){
               fontSize='12px'
               minW='170px'
             >
-              <MenuOptionGroup onChange={sortValue => setSortValue(sortValue)}>
+              <MenuOptionGroup onChange={order => setOrder(order)}>
                 {sortOptions.map(each => 
                   <MenuItemOption
                     key={each}
                     fontWeight='light'
                     value={each}
-                    isChecked={each === sortValue}
+                    isChecked={each === order}
                   >
                     <Flex>
                       {each}
                       <Spacer />
-                      {each === sortValue && <AiOutlineCheck />}  
+                      {each === order && <AiOutlineCheck />}  
                     </Flex>
                   </MenuItemOption>)}
               </MenuOptionGroup>
@@ -94,41 +95,51 @@ export default function Collections({ heading, viewAll, collections }){
         </Flex>
         <Grid pt={10} templateColumns="repeat(4, 1fr)" gap={6}>
         {
-          collections?.map(({imageUrl, name, time, mintAmount, by}) => (
-            <Flex
-              bgColor='#27292C'
-              borderRadius='17px'
-              my={4}
-              border='1px solid #C4C4C4'
-              color='white'
-              flexDir='column'
-              h='300px'
-            >
-              <Box
-                bgImage={`url('${imageUrl}')`}
-                flexGrow='1'
-                bgPosition='center'
-                bgSize='cover'
+          collections <= 0 ?
+          ''
+          :
+          collections?.map(({image_url, name, asset_contract, traits, creator, token_id }) => (
+            <Link href={`/collectible/${asset_contract?.address}/${token_id}`}>
+              <Flex
+                bgColor='#27292C'
                 borderRadius='17px'
-              />
+                my={4}
+                border='1px solid #C4C4C4'
+                color='white'
+                flexDir='column'
+                h='300px'
+                cursor='pointer'
+              >
+                <Box
+                  bgImage={`url('${image_url}')`}
+                  flexGrow='1'
+                  bgPosition='center'
+                  bgSize='cover'
+                  borderRadius='17px'
+                />
 
-              <Flex flexDir='column' w='100%' p={2} textAlign='center'>
-                <Heading fontSize='2xl' ml={2}>{name}</Heading>
-                <Text fontSize='xx-small' fontWeight='light' fontStyle='italic'>by {by}</Text>
-                <hr style={{marginTop: '5px', marginBottom: '5px'}} />
-                <Flex ml={2} fontWeight='light'>
-                  <Stack textAlign='left'>
-                    <Text fontSize='sm'>Drops in</Text>
-                    <Text mt='0 !important' fontSize='sm'>{time}</Text>
-                  </Stack>
-                  <Spacer />
-                  <Stack textAlign='right'>
-                    <Text fontSize='sm'>Mint Amount</Text>
-                    <Text fontSize='sm' mt='0 !important'>{mintAmount}</Text>
-                  </Stack>
+                <Flex flexDir='column' w='100%' p={2} textAlign='center'>
+                  <Heading fontSize='2xl' ml={2}>{name}</Heading>
+                  <Text fontSize='xx-small' fontWeight='light' fontStyle='italic'>
+                    by {creator?.user?.username == null ? 'unknown' : creator?.user?.username}
+                  </Text>
+                  <hr style={{marginTop: '5px', marginBottom: '5px'}} />
+                  <Flex ml={2} fontWeight='light'>
+                    <Stack textAlign='left'>
+                      <Text fontSize='sm'>Drops in</Text>
+                      <Text mt='0 !important' fontSize='sm'>
+                        {asset_contract.created_date.substring(0,10)}
+                      </Text>
+                    </Stack>
+                    <Spacer />
+                    <Stack textAlign='right'>
+                      <Text fontSize='sm'>Mint Amount</Text>
+                      <Text fontSize='sm' mt='0 !important'>{traits.length}</Text>
+                    </Stack>
+                  </Flex>
                 </Flex>
               </Flex>
-            </Flex>
+            </Link>
           ))
         }
         </Grid>

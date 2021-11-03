@@ -1,7 +1,13 @@
 import { Flex, Heading, Text, Spacer } from '@chakra-ui/react'
 import Head from 'next/head'
 
-export default function CoverSection({ imageName, heading, description }){
+export default function CoverSection({ imageName, heading, description, empty }){
+  const emptyAlt = {
+    image: 'https://images.genius.com/9b2e862b80939ada1e1378274f670b8d.1000x1000x1.png',
+    heading: 'Ops!',
+    description: 'Sorry the collection is empty'
+  }
+
   return (
     <>
       <Head>
@@ -11,7 +17,7 @@ export default function CoverSection({ imageName, heading, description }){
       </Head>
       <Flex
         justifyItems='flex-end'
-        bgImage={`url('./${imageName}.png')`}
+        bgImage={`url('${empty ? emptyAlt.image : imageName}')`}
         bgPosition='center'
         bgRepeat='no-repeat'
         bgSize='cover'
@@ -19,8 +25,8 @@ export default function CoverSection({ imageName, heading, description }){
       >
         <Flex mb='50px' ml='50px' flexDir='column' color='white'>
           <Spacer />
-          <Heading mb={7} fontSize='5xl' fontWeight='bold'>{heading}</Heading>
-          <Text fontSize='xl' fontWeight='light'>{description}</Text>
+          <Heading mb={7} fontSize='5xl' fontWeight='bold'>{empty ? emptyAlt.heading : heading}</Heading>
+          <Text fontSize='xl' fontWeight='light'>{empty ? emptyAlt.description : description}</Text>
         </Flex>
       </Flex>
     </>
