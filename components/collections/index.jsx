@@ -15,12 +15,20 @@ export default function Collections({ heading, viewAll, collections }){
         <Flex>
           <Heading color='white' fontSize='3xl'>{heading}</Heading>
           <Spacer />
-          <Link href={viewAll}><Button color='#00CC9B' size='sm' bgColor='white' borderRadius='full'>View All</Button></Link>
+          <Link href={viewAll} passHref={viewAll}>
+            <Button color='#00CC9B' size='sm' bgColor='white' borderRadius='full'>
+              View All
+            </Button>
+          </Link>
         </Flex>
         <ScrollContainer style={collectStyle} overflowX='scroll'>
         {
           collections?.map((each, i) => (
-            <Link href={`/collection/${each?.slug}`}>
+            <Link
+              href={`/collection/${each?.slug}`}
+              passHref={`/collection/${each?.slug}`}
+              key={each?.slug}
+            >
               <Flex
                 key={i}
                 bgColor='#27292C'
