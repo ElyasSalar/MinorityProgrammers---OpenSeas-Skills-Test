@@ -70,7 +70,7 @@ export default function Collections({ heading, viewAll, collections, setOrder, o
               </MenuOptionGroup>
             </MenuList>
           </Menu>
-          <Link href={viewAll}>
+          <Link href={viewAll} passHref={viewAll}>
             <Button
               color='#00CC9B'
               size='sm'
@@ -85,6 +85,7 @@ export default function Collections({ heading, viewAll, collections, setOrder, o
         <Divider colorSchema='white' mt={3} borderColor='white' />
         <Flex style={{gap: '20px'}}>
           {options.map(each => <Button
+            key={`${each}-options`}
             style={each === selectedOption ? selectedStyles : null}
             variant='link'
             fontWeight='light'
@@ -99,7 +100,10 @@ export default function Collections({ heading, viewAll, collections, setOrder, o
           ''
           :
           collections?.map(({image_url, name, asset_contract, traits, creator, token_id }) => (
-            <Link href={`/collectible/${asset_contract?.address}/${token_id}`}>
+            <Link
+              href={`/collectible/${asset_contract?.address}/${token_id}`}
+              key={token_id}
+              passHref={`/collectible/${asset_contract?.address}/${token_id}`}>
               <Flex
                 bgColor='#27292C'
                 borderRadius='17px'
