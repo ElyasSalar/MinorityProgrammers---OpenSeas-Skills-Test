@@ -12,16 +12,16 @@ export default function Home() {
 
   const assets = useFetch('/api/v1/assets', {order_by: orderBy});
 
-  const shinyRapper = useFetch('/api/v1/assets', { collection: 'shiny-rappers' });
-  const crypto = useFetch('/api/v1/assets', { collection: 'cryptohiphopcrew' });
-  const musicHero = useFetch('/api/v1/assets', { collection: 'music-heroes' });
-  
+  const shinyRapper = useFetch('/api/v1/collection/shiny-rappers', {});
+  const crypto = useFetch('/api/v1/collection/cryptohiphopcrew', {});
+  const musicHero = useFetch('/api/v1/collection/music-heroes', {});
+
   const response = [
     shinyRapper, 
     crypto, 
     musicHero
   ]
-  const collections = response.map(each => each?.data?.assets[0]?.collection);
+  const collections = response.map(each => each?.data?.collection);
   
   const isLoading = response.every(each => each.isLoading);
   if(isLoading) return (

@@ -55,12 +55,12 @@ export default function Collections({ heading, viewAll, collections }){
                   <Flex ml={2} fontWeight='light'>
                     <Stack>
                       <Text fontSize='2xl'>Floor Price</Text>
-                      <Text color='#00CC9B' fontWeight='bold' mt='0 !important' fontSize='3xl'>500</Text>
+                      <Text color='#00CC9B' fontWeight='bold' mt='0 !important' fontSize='3xl'>${each?.stats?.floor_price.toFixed()}</Text>
                     </Stack>
                     <Spacer />
                     <Stack textAlign='right'>
                       <Text fontSize='2xl'>Volume</Text>
-                      <Text fontSize='3xl' mt='0 !important'>20,000</Text>
+                      <Text fontSize='3xl' mt='0 !important'>${each?.stats?.total_volume.toFixed()}</Text>
                     </Stack>
                   </Flex>
                 </Flex>

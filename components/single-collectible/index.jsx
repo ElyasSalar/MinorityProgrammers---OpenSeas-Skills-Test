@@ -10,6 +10,10 @@ import {
   Input,
 } from '@chakra-ui/react'
 
+function numberWithCommas(str) {
+  return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export default function SingleCollectible({
     collectionsName,
     assetName,
@@ -64,11 +68,11 @@ export default function SingleCollectible({
               <Flex flexDir='column' flexBasis='25%'>
                 <Stack>
                   <Text fontSize='lg'>Current Bid</Text>
-                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>${currentBid}</Text>
+                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>${numberWithCommas(currentBid)}</Text>
                 </Stack>
                 <Stack>
                   <Text fontSize='lg'>Starting Bid</Text>
-                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>${startingBid}</Text>
+                  <Text fontSize='xl' fontWeight='bold' mt='0 !important'>${numberWithCommas(startingBid)}</Text>
                 </Stack>
               </Flex>
               <Spacer />
@@ -93,7 +97,7 @@ export default function SingleCollectible({
                   border='3px solid #00CC9B'
                   borderRadius='none'
                   h='100%'
-                  fontSize='4xl'
+                  fontSize='2xl'
                   _focus='none'
                 />
                 <Button
