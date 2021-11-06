@@ -9,7 +9,7 @@ export default function NavBar() {
       <Flex bg="white" h="100px" pr={150} pl={150} alignItems="center" bgGradient='linear(to-r, #000, #4D4B4B)'>
         <Spacer />
         <Flex alignItems="center" h="100%" cursor='pointer'>
-          <Link href='/' passHref='/'><Image src={logo} alt='logo' /></Link>
+          <Link href='/' passHref={true}><Image src={logo} alt='logo' /></Link>
         </Flex>
         <Spacer />
       </Flex>

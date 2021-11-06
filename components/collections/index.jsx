@@ -15,7 +15,7 @@ export default function Collections({ heading, viewAll, collections }){
         <Flex>
           <Heading color='white' fontSize='3xl'>{heading}</Heading>
           <Spacer />
-          <Link href={viewAll} passHref={viewAll}>
+          <Link href={viewAll} passHref={true}>
             <Button color='#00CC9B' size='sm' bgColor='white' borderRadius='full'>
               View All
             </Button>
@@ -26,7 +26,7 @@ export default function Collections({ heading, viewAll, collections }){
           collections?.map((each, i) => (
             <Link
               href={`/collection/${each?.slug}`}
-              passHref={`/collection/${each?.slug}`}
+              passHref={true}
               key={each?.slug}
             >
               <Flex

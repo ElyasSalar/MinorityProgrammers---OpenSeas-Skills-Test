@@ -70,7 +70,7 @@ export default function Collections({ heading, viewAll, collections, setOrder, o
               </MenuOptionGroup>
             </MenuList>
           </Menu>
-          <Link href={viewAll} passHref={viewAll}>
+          <Link href={viewAll} passHref={true}>
             <Button
               color='#00CC9B'
               size='sm'
@@ -103,7 +103,7 @@ export default function Collections({ heading, viewAll, collections, setOrder, o
             <Link
               href={`/collectible/${asset_contract?.address}/${token_id}`}
               key={token_id}
-              passHref={`/collectible/${asset_contract?.address}/${token_id}`}>
+              passHref={true}>
               <Flex
                 bgColor='#27292C'
                 borderRadius='17px'
